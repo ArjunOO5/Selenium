@@ -29,6 +29,7 @@ public class Screenshot {
 		File img= SS.getScreenshotAs(OutputType.FILE);
 		File src= new File("./Snaps/"+FileName);
 		FileHandler.copy(img, src);
+		Thread.sleep(200);
 		//Quit
 		driver.quit();
 		
