@@ -51,6 +51,7 @@ public class Alerts {
 		Thread.sleep(3000);
 		// Quit
 		driver.quit();
+		
 	}
 
 	public static Alert extracted(ChromeDriver driver) {
