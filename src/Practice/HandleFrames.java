@@ -11,7 +11,7 @@ import org.openqa.selenium.io.FileHandler;
 
 public class HandleFrames {
 
-	public static void main(String[] args) throws IOException {
+	public static void main(String[] args) throws IOException, InterruptedException {
 		//Initaite Driver
 		ChromeDriver driver = new ChromeDriver();
 		// Maximize Browser
@@ -37,8 +37,9 @@ public class HandleFrames {
 		String FileName = String.valueOf(System.currentTimeMillis())+".png";
 		File des = new File("./Snaps/"+FileName);
 		FileHandler.copy(SS, des);
-
-
+		driver.switchTo().parentFrame();
+		driver.findElement(By.xpath("(//a[normalize-space()='Watch tutorial'])[1]")).click();
+		Thread.sleep(2000);
 		driver.close();
 
 	}
