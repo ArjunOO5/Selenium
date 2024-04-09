@@ -1,4 +1,4 @@
-package Practice;
+package internetHeroku;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
