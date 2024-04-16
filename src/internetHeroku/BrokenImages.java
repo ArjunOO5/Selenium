@@ -23,7 +23,7 @@ public class BrokenImages {
 
 			if(findimg.getAttribute("naturalWidth").equals("0"))
 			{
-				System.out.println("The image is broken"+imagElements.g);
+				System.out.println("The image is broken"+imagElements);
 			}
 
 			else {
