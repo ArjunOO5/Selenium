@@ -12,8 +12,9 @@ public class DataFaker {
 		System.out.println(firstname);
 		System.out.println(lastname);
 		System.out.println(emailString);
-		
-
+			
+			
 	}
-
+	
 }
+
