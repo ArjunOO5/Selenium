@@ -35,7 +35,6 @@ public class BlazeDemo {
 
 		//collect rows from table
 		List<WebElement> listofRows = table.findElements(By.tagName("tr"));
-		System.out.println(listofRows.size());
 
 		//Iterating column Values for clicking Choose this flight
 		for (int i = 0; i < listofRows.size(); i++) {
@@ -44,11 +43,8 @@ public class BlazeDemo {
 			List<WebElement> columnslist =listofRows.get(i).findElements(By.tagName("td"));
 			//collect specfic column Values 
 			WebElement columnname = columnslist.get(2);
-			System.out.println(columnname.getText());
 			if (columnname.getText().equals("Lufthansa")) {
-
 				columnslist.get(0).findElement(By.tagName("input")).click();
-				System.out.println("success");
 				break;
 
 			}
@@ -74,13 +70,16 @@ public class BlazeDemo {
 		// click on rememember me and Purchase flight
 		driver.findElement(By.id("rememberMe")).click();
 		driver.findElement(By.xpath("(//input[@value='Purchase Flight'])[1]")).click();
+		// verification of purchase
+		Boolean resultBoolean= driver.findElement(By.tagName("h1")).isDisplayed();
 
+		if (resultBoolean.equals(true)) {
+			System.out.println("Tickets are Booked Successfully");
+		} else {
+			System.err.println("Ticket booking is failed");
+		}
 
-
-
-
-
-
+		driver.quit();
 	}
 
 }
