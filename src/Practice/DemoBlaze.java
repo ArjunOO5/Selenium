@@ -43,27 +43,42 @@ public class DemoBlaze {
 		driver.findElement(By.xpath("//button[normalize-space()='Sign up']")).click();
 
 		//wait for alter pop up
-		wait.until(ExpectedConditions.alertIsPresent());
-		Alert alerts = driver.switchTo().alert();
-		alerts.accept();
+		wait.until(ExpectedConditions.alertIsPresent()).accept();
 
 		//collect all products
 		List <WebElement> productList = driver.findElements(By.xpath("//body//h4"));
-        
-		for (int i = 0; i <productList.size(); i++) {
-			
-			//String productname = productList.get(i).getText();
-			
-			if (productList.get(i).getText()
-			.equals("Nokia lumia 1520")) {
-				
-				productList.get(i).click();
+		
+		//Iterating all products selecting required one
+		String productName = "Nokia lumia 1520";
+		for (int i = 0; i <productList.size(); i++) 	
+		{			
+			try {
+				if (productList.get(i).getText().equals(productName)) {
+					
+					productList.get(i).click();
+				}
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
 			
 		}
 		
-
+//		// verify selected product is clicked
+//		Boolean verify= driver.findElement(By.className("name")).getText().contains(productName);
+//		System.out.println(verify);
+		
+		//click Add to cart
+		driver.findElement(By.xpath("(//a[normalize-space()='Add to cart'])[1]")).click();
+		
+		//Wait for Alert
+		wait.until(ExpectedConditions.alertIsPresent()).accept();
+		
+		//click on cart
+		driver.findElement(By.id("cartur")).click();
+		
+		
 		//quit
-		driver.quit();
+		//driver.quit();
 	}
 }
