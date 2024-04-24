@@ -1,21 +1,18 @@
 package Practice;
 import java.time.Duration;
-import java.util.Iterator;
 import java.util.List;
-import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
 import io.github.bonigarcia.wdm.WebDriverManager;
 import net.datafaker.Faker;
 
 public class DemoBlaze {
 
-	public static void main(String[] args) throws InterruptedException {
+	public static void main(String[] args) throws InterruptedException  {
 
 		//Instantiate Chrome Driver
 		WebDriverManager.chromedriver().setup();
@@ -47,38 +44,50 @@ public class DemoBlaze {
 
 		//collect all products
 		List <WebElement> productList = driver.findElements(By.xpath("//body//h4"));
-		
+
 		//Iterating all products selecting required one
 		String productName = "Nokia lumia 1520";
 		for (int i = 0; i <productList.size(); i++) 	
-		{			
-			try {
-				if (productList.get(i).getText().equals(productName)) {
-					
-					productList.get(i).click();
-				}
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+		{	 
+			if (productList.get(i).getText().equals(productName)) 			
+			{
+				productList.get(i).click();
+				break;
 			}
-			
 		}
-		
-//		// verify selected product is clicked
-//		Boolean verify= driver.findElement(By.className("name")).getText().contains(productName);
-//		System.out.println(verify);
-		
 		//click Add to cart
-		driver.findElement(By.xpath("(//a[normalize-space()='Add to cart'])[1]")).click();
-		
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.linkText("Add to cart")));
+
+		//click on Add to cart
+
+		driver.findElement(By.linkText("Add to cart")).click();
 		//Wait for Alert
 		wait.until(ExpectedConditions.alertIsPresent()).accept();
-		
+
 		//click on cart
 		driver.findElement(By.id("cartur")).click();
-		
-		
+
+		//Wait for cart and Click Place Order
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//tr[@class='success']//td//img")));
+		driver.findElement(By.xpath("//button[normalize-space()='Place Order']")).click();
+
+		// enter details
+		//WebElement frame =driver.findElement(By.xpath("//div[@id='orderModal']//div[@class='modal-content']"));
+		driver.getWindowHandle();
+		//driver.switchTo().frame(frame);
+		driver.findElement(By.id("name")).sendKeys(username);
+		driver.findElement(By.id("country")).sendKeys(faker.country().name());
+		driver.findElement(By.id("city")).sendKeys(faker.country().capital());
+		driver.findElement(By.id("card")).sendKeys(faker.number().digits(16));
+		int months = faker.number().numberBetween(1, 12);
+		driver.findElement(By.id("month")).sendKeys(String.valueOf(months));
+		int years = faker.number().numberBetween(2024, 2025);
+		driver.findElement(By.id("year")).sendKeys(String.valueOf(years));
+		driver.findElement(By.xpath("(//button[normalize-space()='Purchase'])[1]")).click();
+
+
 		//quit
 		//driver.quit();
+
 	}
 }
