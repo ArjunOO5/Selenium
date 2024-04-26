@@ -38,7 +38,7 @@ public class Try1 {
 		//click on desired product 
 		productList.get(i).click();	
 
-
+		driver.quit();
 
 	}
 

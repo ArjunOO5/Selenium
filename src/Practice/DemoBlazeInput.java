@@ -1,6 +1,8 @@
 package Practice;
 import java.time.Duration;
 import java.util.List;
+import java.util.Scanner;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -10,8 +12,9 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import net.datafaker.Faker;
 
-public class DemoBlaze {
+public class DemoBlazeInput {
 
+	@SuppressWarnings("resource")
 	public static void main(String[] args) throws InterruptedException  {
 
 		//Instantiate Chrome Driver
@@ -46,15 +49,21 @@ public class DemoBlaze {
 		List <WebElement> productList = driver.findElements(By.xpath("//body//h4"));
 
 		//Iterating all products selecting required one
-		String productName = "Nokia lumia 1520";
-		for (int i = 0; i <productList.size(); i++) 	
-		{	 
-			if (productList.get(i).getText().equals(productName)) 			
-			{
-				productList.get(i).click();
-				break;
-			}
+
+
+		for (int j = 0; j < productList.size(); j++) {
+
+			System.out.println(j+". "+  productList.get(j).getText());	
 		}
+
+		//get input from user
+		Scanner name = new Scanner(System.in);
+		System.out.println("Enter Required Product Serial Number");
+		int productnum=name.nextInt();
+
+		//click on product hyperlink
+		productList.get(productnum).click();
+
 		//click Add to cart
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.linkText("Add to cart")));
 
@@ -85,15 +94,15 @@ public class DemoBlaze {
 
 		//wait for order confirmation
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("(//h2[normalize-space()='Thank you for your purchase!'])[1]")));
-	    String orderdetail= driver.findElement(By.xpath("(//p[@class='lead text-muted '])[1]")).getText();
-	    System.out.println(orderdetail);
-	    Thread.sleep(2000);
+		String orderdetail= driver.findElement(By.xpath("(//p[@class='lead text-muted '])[1]")).getText();
+		System.out.println(orderdetail);
+		Thread.sleep(2000);
 		driver.findElement(By.cssSelector(".confirm.btn.btn-lg.btn-primary")).click();
 
 		// wait for homepage to load
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[@id='cat']")));
-		
-		
+
+
 		//quit
 		driver.quit();
 
