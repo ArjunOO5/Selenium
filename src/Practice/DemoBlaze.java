@@ -72,7 +72,9 @@ public class DemoBlaze {
 		driver.findElement(By.xpath("//button[normalize-space()='Place Order']")).click();
 
 		// enter details
-		Thread.sleep(3000);
+		//Thread.sleep(3000);
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//label[@id='totalm']")));
+		
 		driver.findElement(By.id("name")).sendKeys(username);
 		driver.findElement(By.id("country")).sendKeys(faker.country().name());
 		driver.findElement(By.id("city")).sendKeys(faker.country().capital());
