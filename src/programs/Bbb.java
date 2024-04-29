@@ -11,7 +11,6 @@ public class Bbb {
 		kiSet.add("xpu");
 		kiSet.add("Arjun");
 		kiSet.add("Zee");
-		kiSet.add("Arun");
 		kiSet.add("Amazon");
 		for (String string : kiSet) {
 			System.out.println(string);
