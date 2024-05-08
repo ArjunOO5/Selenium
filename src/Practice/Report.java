@@ -18,8 +18,7 @@ public class Report {
 		 test.fail("Killed");
 
 		extent.flush();
-		
-		
+
 		
 	}
 
